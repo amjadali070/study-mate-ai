@@ -1,0 +1,22 @@
+{
+  "name": "rag-project",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=server & npm run dev --workspace=client",
+    "build": "npm run build --workspace=server && npm run build --workspace=client",
+    "start:server": "npm run start --workspace=server",
+    "start:client": "npm run start --workspace=client",
+    "install:all": "npm install",
+    "clean": "npm run clean --workspace=server && npm run clean --workspace=client"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "dependencies": {
+    "@pinecone-database/pinecone": "^6.1.2"
+  }
+}
