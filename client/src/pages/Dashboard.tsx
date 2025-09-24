@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Document, UploadResponse } from '../types';
-import { documentAPI, quizAPI, handleApiError } from '../services/api';
+import { documentAPI, handleApiError } from '../services/api';
 import { formatDate } from '../utils/auth';
 import FileUploader from '../components/FileUploader';
 import LoadingSpinner from '../components/LoadingSpinner';

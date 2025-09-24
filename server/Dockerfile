@@ -11,12 +11,18 @@ COPY package*.json ./
 COPY tsconfig.json ./
 COPY prisma ./prisma/
 
-RUN npm ci --only=production && npm cache clean --force
+RUN if [ -f package-lock.json ]; then npm ci --omit=dev && npm cache clean --force; else npm install --omit=dev && npm cache clean --force; fi
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+
+# Install ALL dependencies (including dev dependencies) for building
+COPY package*.json ./
+COPY tsconfig.json ./
+COPY prisma ./prisma/
+RUN if [ -f package-lock.json ]; then npm ci && npm cache clean --force; else npm install && npm cache clean --force; fi
+
 COPY . .
 
 # Generate Prisma client
